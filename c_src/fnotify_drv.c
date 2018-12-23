@@ -907,6 +907,7 @@ DRIVER_INIT(nl_drv)
 {
     ErlDrvEntry* ptr = &fnotify_drv_entry;
 
+    memset(ptr, 0, sizeof(ErlDrvEntry));
     ptr->driver_name = "fnotify_drv";
     ptr->init  = fnotify_drv_init;
     ptr->start = fnotify_drv_start;
@@ -918,16 +919,9 @@ DRIVER_INIT(nl_drv)
     ptr->control = fnotify_drv_ctl;
     ptr->timeout = fnotify_drv_timeout;
     ptr->outputv = fnotify_drv_outputv;
-    ptr->ready_async = 0;
-    ptr->flush = 0;
-    ptr->call = 0;
-    ptr->event = 0;
     ptr->extended_marker = ERL_DRV_EXTENDED_MARKER;
     ptr->major_version = ERL_DRV_EXTENDED_MAJOR_VERSION;
     ptr->minor_version = ERL_DRV_EXTENDED_MINOR_VERSION;
     ptr->driver_flags = ERL_DRV_FLAG_USE_PORT_LOCKING;
-    ptr->process_exit = 0;
-    ptr->stop_select = 0;  // add me
-
     return (ErlDrvEntry*) ptr;
 }
